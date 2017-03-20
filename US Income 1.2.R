@@ -4,8 +4,8 @@ cv_vars <-  helper("data/credit_vision/credit_vision_variables")
 
 list(
      import =
-     income_verified(start='2015-07-01',end='2015-10-31') ~ credit_vision + transunion313 + transunion + rails_state + rails_fico + income_by_zip %s3key% 'tmp/income_1.2/data/yue/df_full_vef_151218'
-
+#      income_verified(start='2015-07-01',end='2015-10-31') ~ credit_vision + transunion313 + transunion + rails_state + rails_fico + income_by_zip %s3key% 'tmp/income_1.2/data/yue/df_full_vef_151218'
+     income_verified(start='2016-09-01',end='2016-12-01') ~ credit_vision + transunion313 + transunion + rails_state + rails_fico + income_by_zip %s3key% 'tmp/mgv/income_1.2/data/df_income_091216'
      , data = list(
                      "Require necessary packages"            = list( function (.) { Ramd::packages('statsUtils'); . })
                     , "Remove any rows w > 30% missing"      = list( remove_sparse_rows, threshold = 0.3)
@@ -33,7 +33,7 @@ list(
                       , metrics          = "rmse")
     # , model_card = list(n=1)
      , export = list(
-       s3 = 'income/en-US/1.2/eddie_full_vef_151214',
-       s3data = 'income/en-US/1.2/data/eddie_full_vef_151214'
+       s3 = 'tmp/mgv/income_1.2/model/df_income_091216',
+       r = 'income12'
      )
 )
